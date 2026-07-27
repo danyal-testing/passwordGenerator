@@ -1,0 +1,116 @@
+/* =========================================================================
+   Component: card — shared surface plus the password output card.
+   Cascade layer: components.
+   ========================================================================= */
+@layer components {
+  /* ---- Card base ---- */
+  .card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--elevation-2);
+  }
+
+  /* ---- Output ---- */
+  .generator__output {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: 0 clamp(1rem, 4vw, 1.75rem);
+    min-height: 4.625rem;
+  }
+  .generator__password {
+    display: grid;
+    align-content: center;
+    flex: 1 1 auto;
+    min-width: 0;
+    font-family: var(--font-mono);
+    /* A comfortable default that the runtime can reduce only when a long
+       password needs to stay within two lines in a narrow container. */
+    font-size: clamp(1rem, 2.4vw, 1.5rem);
+    font-weight: var(--weight-bold);
+    letter-spacing: 0.25px;
+    line-height: 1.25;
+    min-block-size: 2.5em;
+    /* Always show the FULL password: wrap onto extra lines instead of clipping
+       with an ellipsis. break-word keeps a long unbroken string from
+       overflowing the card. */
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: none;
+  }
+  .generator__password--placeholder {
+    color: var(--text-placeholder);
+    font-weight: var(--weight-medium);
+  }
+  .generator__password.is-updated {
+    animation: pg-pop var(--duration-slow) var(--ease-spring);
+  }
+
+  /* Copy control — uses the secure-green icon colour. */
+  .generator__copy {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex: none;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    justify-content: center;
+    padding: var(--space-2);
+    border-radius: var(--radius-sm);
+    color: var(--icon-green);
+    transition:
+      color var(--duration-fast) var(--ease-standard),
+      background var(--duration-fast) var(--ease-standard),
+      transform var(--duration-fast) var(--ease-spring);
+  }
+  .generator__copy:not(:disabled):hover {
+    color: var(--icon-green-strong);
+    background: var(--surface-2);
+  }
+  .generator__copy:not(:disabled):active {
+    transform: scale(0.9);
+  }
+  .generator__copy:disabled {
+    color: var(--text-muted);
+    cursor: not-allowed;
+  }
+  .generator__copy.is-error,
+  .generator__copy.is-error .generator__copy-status {
+    color: var(--danger);
+  }
+  .generator__copy-status {
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--success);
+  }
+  .generator__copy-status:empty {
+    display: none;
+  }
+  .generator__copy-icon {
+    width: 1.375rem;
+    height: 1.375rem;
+    fill: currentColor;
+  }
+  /* Idle shows "copy"; copied shows "copy-check" (Tabler icons). */
+  .generator__copy-icon--check {
+    display: none;
+    color: var(--icon-green-strong);
+  }
+  .generator__copy.is-copied .generator__copy-icon--copy {
+    display: none;
+  }
+  .generator__copy.is-copied .generator__copy-icon--check {
+    display: block;
+  }
+
+  /* ---- Settings panel (also a card) ---- */
+  .generator__panel {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.875rem, 2vh, 1.375rem);
+    padding: clamp(1.125rem, 3.5vw, 1.75rem);
+  }
+}

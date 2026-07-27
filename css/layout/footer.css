@@ -1,0 +1,16 @@
+/* =========================================================================
+   Layout: footer — trust footnote below the app.
+   Cascade layer: components.
+   ========================================================================= */
+@layer components {
+  .generator__footnote {
+    max-width: 36ch;
+    margin-inline: auto;
+    padding-inline: var(--space-3);
+    text-align: center;
+    font-size: var(--text-xs);
+    line-height: 1.45;
+    color: var(--text-secondary);
+    text-wrap: balance;
+  }
+}

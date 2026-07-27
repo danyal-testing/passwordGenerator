@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Page not found — Password Generator</title>
+    <meta
+      name="description"
+      content="The page you were looking for could not be found."
+    />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0a0b0e" data-theme-color />
+    <meta name="robots" content="noindex" />
+
+    <link rel="icon" href="images/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="images/logo-rounded.svg" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- Set theme before first paint to avoid a flash of the wrong theme. -->
+    <script>
+      (function () {
+        try {
+          let t = localStorage.getItem("pg-theme");
+          if (t !== "light" && t !== "dark") {
+            t = window.matchMedia?.("(prefers-color-scheme: light)").matches
+              ? "light"
+              : "dark";
+          }
+          document.documentElement.setAttribute("data-theme", t);
+        } catch {}
+      })();
+    </script>
+  </head>
+  <body>
+    <main class="generator" aria-labelledby="notfound-title">
+      <div class="card notfound">
+        <p class="notfound__code">404</p>
+        <h1 class="notfound__title" id="notfound-title">Page not found</h1>
+        <p class="notfound__text">
+          The page you were looking for doesn’t exist or may have moved.
+        </p>
+        <a class="btn btn--primary notfound__home" href="./">
+          Back to the generator
+        </a>
+      </div>
+    </main>
+  </body>
+</html>

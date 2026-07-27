@@ -1,0 +1,38 @@
+/* =========================================================================
+   Utilities: animations — keyframes and reduced-motion handling.
+   Keyframes are global (not layered) so they can be referenced anywhere.
+   ========================================================================= */
+
+/* Subtle pop when a new password is written to the output. */
+@keyframes pg-pop {
+  0% {
+    transform: scale(0.985);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Slow full rotation of the background aurora. */
+@keyframes pg-aurora {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+
+/* Respect users who prefer reduced motion: freeze animations + transitions. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

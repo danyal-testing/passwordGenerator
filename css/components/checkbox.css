@@ -1,0 +1,84 @@
+/* =========================================================================
+   Component: checkbox — character-set options.
+   Cascade layer: components.
+
+   A visually-hidden native checkbox drives all state. The .option__box shows
+   a simple outline (::before) when unchecked, and the green Tabler "checkbox"
+   icon (.option__check) when checked.
+   ========================================================================= */
+@layer components {
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.5rem, 1.4vh, 0.875rem);
+    border: 0;
+  }
+  .option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    min-height: 2.75rem;
+    cursor: pointer;
+  }
+  .option__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .option__box {
+    position: relative;
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 1.625rem;
+    height: 1.625rem;
+    border-radius: var(--radius-xs);
+  }
+  /* Unchecked state: rounded square outline. */
+  .option__box::before {
+    content: "";
+    width: 1.125rem;
+    height: 1.125rem;
+    border: 2px solid var(--border-strong);
+    border-radius: var(--radius-xs);
+    transition:
+      border-color var(--duration-fast) var(--ease-standard),
+      opacity var(--duration-fast) var(--ease-standard);
+  }
+  /* Checked state: green box-with-check icon (Tabler "checkbox"). */
+  .option__check {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 1.625rem;
+    height: 1.625rem;
+    color: var(--icon-green);
+    opacity: 0;
+    transform: scale(0.5);
+    transition:
+      opacity var(--duration-fast) var(--ease-standard),
+      transform var(--duration-normal) var(--ease-spring);
+    pointer-events: none;
+  }
+  .option:hover .option__box::before {
+    border-color: var(--accent);
+  }
+  .option__input:checked + .option__box::before {
+    opacity: 0;
+  }
+  .option__input:checked + .option__box .option__check {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .option__input:focus-visible + .option__box {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+  .option__label {
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    user-select: none;
+  }
+}

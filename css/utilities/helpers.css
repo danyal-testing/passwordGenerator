@@ -1,0 +1,37 @@
+/* =========================================================================
+   Utilities: helpers — small single-purpose classes.
+   Cascade layer: utilities (highest layered priority).
+   ========================================================================= */
+@layer utilities {
+  /* Visually hide content while keeping it available to screen readers. */
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Keyboard-only bypass link for reaching the generator controls directly. */
+  .skip-link {
+    position: fixed;
+    inset-block-start: var(--space-3);
+    inset-inline-start: var(--space-3);
+    z-index: var(--z-toast);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-sm);
+    background: var(--accent);
+    color: var(--on-accent);
+    font-weight: var(--weight-bold);
+    text-decoration: none;
+    transform: translateY(calc(-100% - var(--space-6)));
+    transition: transform var(--duration-fast) var(--ease-decelerate);
+  }
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,63 @@
+/* =========================================================================
+   Component: strength-meter — password strength indicator.
+   Cascade layer: components.
+   ========================================================================= */
+@layer components {
+  .strength {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: 0 var(--space-4);
+    min-height: 3.5rem;
+    background: var(--surface-2);
+    border-radius: var(--radius-md);
+  }
+  .strength__label {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+  }
+  .strength__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .strength__text {
+    font-size: var(--text-md);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    transition: color var(--duration-normal) var(--ease-standard);
+  }
+  .strength__bars {
+    display: flex;
+    gap: var(--space-2);
+  }
+  .strength__bar {
+    width: 0.625rem;
+    height: 1.75rem;
+    border: 2px solid var(--border-strong);
+    border-radius: var(--radius-xs);
+    transition:
+      background var(--duration-normal) var(--ease-standard),
+      border-color var(--duration-normal) var(--ease-standard);
+  }
+  .strength__bar--too-weak {
+    background: var(--strength-bar-too-weak);
+    border-color: var(--strength-bar-too-weak);
+  }
+  .strength__bar--weak {
+    background: var(--strength-bar-weak);
+    border-color: var(--strength-bar-weak);
+  }
+  .strength__bar--medium {
+    background: var(--strength-bar-medium);
+    border-color: var(--strength-bar-medium);
+  }
+  .strength__bar--strong {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+}

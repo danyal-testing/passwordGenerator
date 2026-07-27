@@ -1,0 +1,263 @@
+/* =========================================================================
+   Design tokens — the single source of truth for every visual decision.
+   Cascade layer: tokens.
+
+   Breakpoint tokens (documented here since custom properties cannot be used
+   inside @media prelude): xs 360 · sm 480 · md 576 · lg 768 · xl 1024 ·
+   2xl 1280 · 3xl 1536.
+   ========================================================================= */
+@layer tokens {
+  :root {
+    /* ---- Typography ---- */
+    --font-sans:
+      system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+      "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    --font-mono:
+      ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", "Roboto Mono",
+      Menlo, Consolas, "Liberation Mono", monospace;
+
+    /* Fluid type scale (clamp) — no arbitrary sizes anywhere */
+    --text-2xs: 0.75rem; /* 12 — caption / footnote */
+    --text-xs: 0.8125rem; /* 13 — hint / helper */
+    --text-sm: 0.9375rem; /* 15 — UI label / body-sm */
+    --text-base: 1rem; /* 16 — body */
+    --text-md: 1.125rem; /* 18 — emphasis */
+    --text-lg: clamp(1.125rem, 1.02rem + 0.5vw, 1.375rem); /* strength value */
+    --text-xl: clamp(1.375rem, 1.2rem + 0.9vw, 1.625rem); /* length value */
+    --text-2xl: clamp(1.5rem, 1.15rem + 1.7vw, 2.125rem); /* password */
+    --text-3xl: clamp(1.75rem, 1.3rem + 2.2vw, 2.5rem);
+
+    --leading-tight: 1.15;
+    --leading-snug: 1.3;
+    --leading-normal: 1.5;
+    --tracking-tight: -0.01em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.06em;
+    --tracking-wider: 0.12em;
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+
+    /* Semantic type roles — the vocabulary components should use so no file
+       ever hardcodes a raw size. Each role maps to the fluid scale above,
+       keeping a single source of truth. (Display/H1..H6 are defined for a
+       complete, reusable system even though this single-view app only
+       surfaces a few of them.) */
+    --font-display: clamp(2.25rem, 1.6rem + 3.2vw, 3.25rem);
+    --font-h1: var(--text-3xl);
+    --font-h2: var(--text-2xl);
+    --font-h3: var(--text-xl);
+    --font-h4: var(--text-lg);
+    --font-h5: var(--text-md);
+    --font-h6: var(--text-base);
+    --font-body-lg: var(--text-md);
+    --font-body: var(--text-base);
+    --font-small: var(--text-sm);
+    --font-caption: var(--text-2xs);
+    --font-button: var(--text-sm);
+    --font-input: var(--text-base);
+    --font-helper: var(--text-xs);
+
+    /* Paragraph rhythm + reading measure (optimal line length ≈ 66ch). */
+    --paragraph-spacing: 1em;
+    --measure: 66ch;
+    --measure-narrow: 48ch;
+
+    /* ---- Spacing scale (4px base) ---- */
+    --space-1: 0.25rem; /* 4  — icon gaps, hairline insets */
+    --space-2: 0.5rem; /* 8  — tight gaps, chip padding */
+    --space-3: 0.75rem; /* 12 — control inner padding */
+    --space-4: 1rem; /* 16 — default gap / card rhythm */
+    --space-5: 1.25rem; /* 20 — comfortable gap */
+    --space-6: 1.5rem; /* 24 — card padding, section gap */
+    --space-7: 1.75rem; /* 28 — roomy component padding */
+    --space-8: 2rem; /* 32 — large card padding */
+    --space-10: 2.5rem; /* 40 — section separation */
+    --space-12: 3rem; /* 48 — major section */
+    --space-14: 3.5rem; /* 56 */
+    --space-16: 4rem; /* 64 — page block spacing */
+    --space-20: 5rem; /* 80 */
+    --space-24: 6rem; /* 96 */
+    --space-32: 8rem; /* 128 — hero / max rhythm */
+
+    /* ---- Radius ---- */
+    --radius-xs: 0.25rem;
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    --radius-full: 9999px;
+
+    /* ---- Motion ---- */
+    --duration-instant: 80ms;
+    --duration-fast: 140ms;
+    --duration-normal: 220ms;
+    --duration-slow: 360ms;
+    --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+    --ease-decelerate: cubic-bezier(0, 0, 0, 1);
+    --ease-accelerate: cubic-bezier(0.3, 0, 1, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* ---- Opacity ---- */
+    --opacity-disabled: 0.45;
+    --opacity-muted: 0.7;
+
+    /* ---- Z-index ---- */
+    --z-base: 0;
+    --z-raised: 10;
+    --z-sticky: 100;
+    --z-overlay: 1000;
+    --z-toast: 1200;
+
+    /* ---- Layout ---- */
+    --container-max: 33.75rem; /* 540px — optimal reading/scanning width */
+    --control-height: 3.25rem;
+    --control-height-compact: 2.875rem;
+
+    /* Public semantic aliases — stable vocabulary for future components. */
+    --color-background: var(--bg);
+    --color-surface: var(--surface-1);
+    --color-surface-subtle: var(--surface-2);
+    --color-surface-raised: var(--surface-3);
+    --color-primary: var(--accent);
+    --color-primary-hover: var(--accent-hover);
+    --color-primary-pressed: var(--accent-pressed);
+    --color-text-primary: var(--text-primary);
+    --color-text-secondary: var(--text-secondary);
+    --color-border: var(--border);
+    --spacing-xs: var(--space-1);
+    --spacing-sm: var(--space-2);
+    --spacing-md: var(--space-4);
+    --spacing-lg: var(--space-6);
+    --shadow-sm: var(--elevation-1);
+    --shadow-md: var(--elevation-2);
+    --shadow-lg: var(--elevation-3);
+  }
+
+  /* ---- Dark theme (default) — layered surfaces, never pure black ---- */
+  :root,
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0a0b0e;
+    --bg-gradient-top: #15171d;
+    --surface-1: #16181e; /* cards */
+    --surface-2: #1e2128; /* inset (strength) */
+    --surface-3: #262a33; /* raised controls */
+    --border: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.16);
+    --text-primary: #e7e9ee;
+    --text-secondary: #a8aeba;
+    --text-muted: #a8aeba;
+    --text-placeholder: #a8aeba;
+    --accent: #5ee38d;
+    --accent-hover: #7aed9f;
+    --accent-pressed: #45c973;
+    --accent-text: #7aed9f; /* accent used as text/icon */
+    --on-accent: #06110a;
+    --focus-ring: #6ae895;
+    /* Secure, eye-pleasing emerald green used for the copy + checkbox icons */
+    --icon-green: #34d27a;
+    --icon-green-strong: #5ee38d;
+    /* Animated background aurora glows (dark) */
+    --glow-1: rgba(52, 210, 122, 0.18);
+    --glow-2: rgba(56, 189, 248, 0.12);
+    --glow-3: rgba(94, 227, 141, 0.14);
+    --success: #34d27a;
+    --warning: #fbbf24;
+    --caution: #f8cd65;
+    --danger: #fca5a5;
+    --info: #60a5fa;
+    --strength-bar-weak: #ffb454;
+    --strength-bar-medium: #ffd76a;
+    --strength-bar-too-weak: #ff8cab;
+    --overlay: rgba(0, 0, 0, 0.6);
+    --scrim: rgba(10, 11, 14, 0.72);
+    --elevation-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --elevation-2:
+      0 1px 2px rgba(0, 0, 0, 0.26), 0 10px 28px rgba(0, 0, 0, 0.28);
+    --elevation-3: 0 18px 42px rgba(0, 0, 0, 0.44);
+    --elevation-4: 0 28px 70px rgba(0, 0, 0, 0.5);
+  }
+
+  /* ---- Light theme — soft background, no pure white large surface ---- */
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #eef1f6;
+    --bg-gradient-top: #f8fafc;
+    --surface-1: #ffffff; /* card element (not a page-size surface) */
+    --surface-2: #f1f4f9; /* inset */
+    --surface-3: #e7ecf3; /* raised controls */
+    --border: rgba(15, 23, 42, 0.1);
+    --border-strong: rgba(15, 23, 42, 0.18);
+    --text-primary: #141821;
+    --text-secondary: #374151;
+    --text-muted: #374151;
+    --text-placeholder: #374151;
+    --accent: #166534;
+    --accent-hover: #14532d;
+    --accent-pressed: #052e16;
+    --accent-text: #166534;
+    --on-accent: #ffffff;
+    --focus-ring: #166534;
+    /* Deeper green for light theme so the icons keep strong contrast */
+    --icon-green: #16a34a;
+    --icon-green-strong: #15803d;
+    /* Animated background aurora glows (light) */
+    --glow-1: rgba(22, 163, 74, 0.16);
+    --glow-2: rgba(59, 130, 246, 0.12);
+    --glow-3: rgba(16, 185, 129, 0.14);
+    --success: #16a34a;
+    --warning: #b45309;
+    --caution: #a16207;
+    --danger: #991b1b;
+    --info: #2563eb;
+    --strength-bar-weak: #f29f3a;
+    --strength-bar-medium: #f3c74d;
+    --strength-bar-too-weak: #ef5d83;
+    --overlay: rgba(15, 23, 42, 0.4);
+    --scrim: rgba(255, 255, 255, 0.72);
+    --elevation-1: 0 1px 2px rgba(15, 23, 42, 0.08);
+    --elevation-2: 0 6px 16px rgba(15, 23, 42, 0.1);
+    --elevation-3: 0 18px 42px rgba(15, 23, 42, 0.12);
+    --elevation-4: 0 28px 70px rgba(15, 23, 42, 0.16);
+  }
+
+  /* No-JS fallback: honour system preference when no explicit attribute. */
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme]) {
+      color-scheme: light;
+      --bg: #eef1f6;
+      --bg-gradient-top: #f8fafc;
+      --surface-1: #ffffff;
+      --surface-2: #f1f4f9;
+      --surface-3: #e7ecf3;
+      --border: rgba(15, 23, 42, 0.1);
+      --border-strong: rgba(15, 23, 42, 0.18);
+      --text-primary: #141821;
+      --text-secondary: #374151;
+      --text-muted: #374151;
+      --text-placeholder: #374151;
+      --accent: #166534;
+      --accent-hover: #14532d;
+      --accent-pressed: #052e16;
+      --accent-text: #166534;
+      --on-accent: #ffffff;
+      --focus-ring: #166534;
+      --icon-green: #16a34a;
+      --icon-green-strong: #15803d;
+      /* Animated background aurora glows (light, no-JS) */
+      --glow-1: rgba(22, 163, 74, 0.16);
+      --glow-2: rgba(59, 130, 246, 0.12);
+      --glow-3: rgba(16, 185, 129, 0.14);
+      --success: #16a34a;
+      --warning: #b45309;
+      --caution: #a16207;
+      --danger: #991b1b;
+      --info: #2563eb;
+      --strength-bar-weak: #f29f3a;
+      --strength-bar-medium: #f3c74d;
+      --strength-bar-too-weak: #ef5d83;
+    }
+  }
+}

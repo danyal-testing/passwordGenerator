@@ -1,0 +1,73 @@
+/* =========================================================================
+   Layout: header — title row and the theme toggle button.
+   Cascade layer: components.
+   ========================================================================= */
+@layer components {
+  .generator__header {
+    display: grid;
+    grid-template-columns: 2.75rem 1fr 2.75rem;
+    align-items: center;
+  }
+  .generator__title {
+    grid-column: 2;
+    text-align: center;
+    font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+    font-weight: var(--weight-semibold);
+    letter-spacing: -0.015em;
+    color: var(--text-secondary);
+  }
+
+  /* The entire button is the hit target: children never intercept clicks, and
+     a raised stacking context keeps it clickable above neighbouring cells. */
+  .theme-toggle {
+    grid-column: 3;
+    justify-self: end;
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    box-shadow: var(--elevation-1);
+    transition:
+      color var(--duration-fast) var(--ease-standard),
+      background var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
+      transform var(--duration-fast) var(--ease-spring);
+  }
+  .theme-toggle:hover {
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+  }
+  .theme-toggle:active {
+    transform: scale(0.9);
+  }
+  /* Route every click on the icons / hidden label up to the button itself. */
+  .theme-toggle > * {
+    pointer-events: none;
+  }
+  /* The visible control is a 44px CIRCLE, so its bounding-box corners fall
+     OUTSIDE the clickable circle — that is why clicks landing just off the
+     icon used to "miss". This transparent overlay extends the real hit target
+     to a comfortable ~60px square so a click anywhere on (or right around) the
+     button toggles the theme, no need to hit the icon or the exact centre. */
+  .theme-toggle::after {
+    content: "";
+    position: absolute;
+    inset: -0.5rem;
+    border-radius: inherit;
+  }
+
+  /* Show the icon that represents the theme the user would switch TO. */
+  [data-theme="dark"] .theme-toggle__icon--moon {
+    display: none;
+  }
+  [data-theme="light"] .theme-toggle__icon--sun {
+    display: none;
+  }
+}

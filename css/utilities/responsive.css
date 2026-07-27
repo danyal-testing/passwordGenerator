@@ -1,0 +1,163 @@
+/* =========================================================================
+   Utilities: responsive — breakpoint, short-viewport and environment media.
+   These rules are intentionally left OUT of the cascade layers so they can
+   override the layered component defaults (unlayered rules beat layered ones).
+   ========================================================================= */
+
+/* ---- Phones and small tablets: larger touch targets, tighter rhythm ----
+   44px is the recommended minimum touch target (WCAG 2.5.5 / Apple HIG). */
+@media (max-width: 30rem) {
+  body::before {
+    width: 140vmax;
+    height: 140vmax;
+    filter: blur(36px) saturate(108%);
+    animation: none;
+    will-change: auto;
+  }
+  .generator__output {
+    gap: var(--space-3);
+    padding: 0 var(--space-4);
+    min-height: 3.75rem;
+  }
+  .generator__password {
+    font-size: clamp(0.9375rem, 4vw, 1.125rem);
+    letter-spacing: 0;
+  }
+  .generator__copy {
+    padding: var(--space-3);
+  }
+  .option {
+    min-height: 2.75rem; /* comfortable tap target */
+    gap: var(--space-3);
+  }
+  .strength {
+    padding: 0 var(--space-3);
+  }
+}
+
+/* ---- Very small phones (<= 360px): trim non-essential chrome ---- */
+@media (max-width: 22.5rem) {
+  .strength__label {
+    font-size: var(--text-xs);
+  }
+  .generator__footnote {
+    max-width: 30ch;
+    font-size: var(--font-caption);
+    line-height: 1.4;
+  }
+}
+
+/* ---- Tablet portrait: keep the centred column but give it more room ---- */
+@media (min-width: 30.0625rem) and (max-width: 64rem) {
+  .generator {
+    gap: var(--space-4);
+  }
+  .generator__panel {
+    padding: var(--space-7);
+  }
+}
+
+/* ---- Short-viewport compaction: keep the trust footnote visible while
+   tightening surrounding rhythm instead of hiding it. ---- */
+@media (max-height: 720px) {
+  body {
+    padding-top: max(0.625rem, env(safe-area-inset-top));
+    padding-bottom: max(0.625rem, env(safe-area-inset-bottom));
+  }
+  .field__hint {
+    display: none;
+  }
+  .generator {
+    gap: var(--space-3);
+  }
+  .generator__panel {
+    gap: var(--space-3);
+  }
+  .generator__footnote {
+    max-width: 32ch;
+    font-size: 0.6875rem;
+    line-height: 1.35;
+  }
+}
+
+/* ---- Very short viewports (laptops, split windows ~600px tall): tighten
+   spacing and control heights so the full app + a wrapped 32-char password
+   fit without triggering the page scrollbar. ---- */
+@media (max-height: 680px) {
+  .generator {
+    gap: var(--space-2);
+  }
+  .generator__panel {
+    gap: var(--space-2);
+    padding: var(--space-4);
+  }
+  .strength {
+    min-height: 3rem;
+  }
+  .btn {
+    min-height: var(--control-height-compact);
+  }
+  .generator__footnote {
+    max-width: 30ch;
+    font-size: 0.6875rem;
+  }
+}
+
+/* ---- Windows High Contrast / forced colours ---- */
+@media (forced-colors: active) {
+  .card,
+  .theme-toggle,
+  .option__box,
+  .strength__bar,
+  .btn {
+    border: 1px solid ButtonText;
+  }
+  .btn--primary {
+    background: ButtonText;
+    color: ButtonFace;
+  }
+}
+
+/* ---- Ultra-narrow screens (folded foldables, e.g. Galaxy Fold ~280px) ----
+   Trim horizontal padding so the layout never triggers horizontal scrolling
+   on the smallest viewports while keeping comfortable padding everywhere else. */
+@media (max-width: 19rem) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  .theme-toggle::after {
+    /* Keep the expanded target inside the folded viewport at the right edge. */
+    inset: -0.5rem 0 -0.5rem -0.5rem;
+  }
+  .strength {
+    gap: var(--space-2);
+    padding-inline: var(--space-2);
+  }
+  .strength__meta {
+    gap: var(--space-2);
+  }
+  .strength__bars {
+    gap: var(--space-1);
+  }
+  .generator__output {
+    padding-inline: var(--space-2);
+  }
+  .generator__password {
+    font-size: 0.875rem;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* ---- Print ---- */
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .theme-toggle,
+  .generator__copy,
+  .btn {
+    display: none;
+  }
+}

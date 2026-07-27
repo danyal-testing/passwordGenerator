@@ -1,0 +1,14 @@
+/* =========================================================================
+   Layout: container — the centred single-column app shell.
+   Cascade layer: components.
+   ========================================================================= */
+@layer components {
+  .generator {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.75rem, 2vh, 1.125rem);
+    width: 100%;
+    min-width: 0;
+    max-width: var(--container-max);
+  }
+}
