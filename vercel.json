@@ -1,5 +1,5 @@
 {
-  "$schema": "",
+  "$schema": "https://danyalpassgen.vercel.app/",
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
